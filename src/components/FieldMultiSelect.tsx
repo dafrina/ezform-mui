@@ -8,7 +8,7 @@ import {
 	TextField
 } from "@material-ui/core";
 
-interface FieldMultiSelectProps extends FieldBaseProps {
+export interface FieldMultiSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
 	variant?: "filled" | "outlined" | "standard";
 }

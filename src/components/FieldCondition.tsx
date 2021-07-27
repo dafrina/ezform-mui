@@ -1,4 +1,4 @@
-interface FieldConditionProps {
+export interface FieldConditionProps {
 	when: boolean;
 	children: any;
 }

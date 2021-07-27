@@ -3,7 +3,7 @@ import {FormControl, Grid, Button, FormLabel, FormHelperText, Tooltip} from "@ma
 import {FieldBaseProps} from "./FieldBase";
 import {useField} from "@ezform/core";
 
-interface FieldFileProps extends FieldBaseProps {
+export interface FieldFileProps extends FieldBaseProps {
 	buttonLabel?: string;
 	defaultHelperText?: string;
 	noFileSelectedText?: string;

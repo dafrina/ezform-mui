@@ -3,7 +3,7 @@ import { FieldBaseProps } from "./FieldBase";
 import { useField } from "@ezform/core";
 import { TextField } from "@material-ui/core";
 
-interface FieldTextProps extends FieldBaseProps {
+export interface FieldTextProps extends FieldBaseProps {
 	multiline?: boolean;
 	variant?: "filled" | "outlined" | "standard";
 	color?: "primary" | "secondary";

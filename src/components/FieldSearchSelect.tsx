@@ -4,7 +4,7 @@ import { useField } from "@ezform/core";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-interface FieldSearchSelectProps extends FieldBaseProps {
+export interface FieldSearchSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
 	variant?: "filled" | "outlined" | "standard";
 }

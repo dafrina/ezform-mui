@@ -3,7 +3,7 @@ import { FieldBaseProps } from "./FieldBase";
 import { useField } from "@ezform/core";
 import {MenuItem, TextField} from "@material-ui/core";
 
-interface FieldSelectProps extends FieldBaseProps {
+export interface FieldSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
 	variant?: "filled" | "outlined" | "standard";
 }

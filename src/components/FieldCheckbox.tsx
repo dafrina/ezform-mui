@@ -3,7 +3,7 @@ import { FieldBaseProps } from "./FieldBase";
 import { useField } from "@ezform/core";
 import { FormControl, FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 
-interface FieldCheckboxProps extends FieldBaseProps {
+export interface FieldCheckboxProps extends FieldBaseProps {
 	color?: "default" | "primary" | "secondary";
 }
 

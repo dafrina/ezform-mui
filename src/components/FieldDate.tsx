@@ -6,7 +6,7 @@ import MomentUtils from "@date-io/moment";
 import {ParsableDate} from "@material-ui/pickers/constants/prop-types";
 import {FormControl} from "@material-ui/core";
 
-interface FieldDateProps extends FieldBaseProps {
+export interface FieldDateProps extends FieldBaseProps {
 	format: string;
 	autoOk?: boolean;
 	disableToolbar?: boolean;
