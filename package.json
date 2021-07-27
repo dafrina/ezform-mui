@@ -1,7 +1,7 @@
 {
   "name": "@ezform/mui",
-  "version": "1.0.0",
-  "description": "Material UI form components for EZForm",
+  "version": "1.1.1",
+  "description": "Material UI form components for use with EZForm React validation and form library",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -9,7 +9,10 @@
   ],
   "author": "dafrina",
   "license": "ISC",
-  "repository": "https://github.com/dafrina/ezform-mui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dafrina/ezform-mui.git"
+  },
   "homepage": "https://github.com/dafrina/ezform-mui",
   "scripts": {
     "build": "tsc"
@@ -26,15 +29,29 @@
     "@types/react-dom": "17.0.9"
   },
   "dependencies": {
-    "@ezform/core": "^1.0.5"
-  },
-  "peerDependencies": {
-    "react": "^17.x",
+    "@ezform/core": "^1.1.0",
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/pickers": "^3.3.10",
     "@date-io/moment": "^1.3.13",
     "moment": "^2.29.1"
-  }
+  },
+  "peerDependencies": {
+    "react": "^17.x"
+  },
+  "bugs": {
+    "url": "https://github.com/dafrina/ezform-mui/issues"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "form",
+    "validation",
+    "material",
+    "mui"
+  ]
 }

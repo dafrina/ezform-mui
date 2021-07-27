@@ -1,4 +1,4 @@
-import { FormRefObject } from "../hooks";
+import { FormRefObject } from "@ezform/core";
 
 export interface FieldBaseProps {
 	name: string;

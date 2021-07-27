@@ -15,10 +15,10 @@ You can find a working demo here:
 ## Install
 
 ````
-npm i @ezform/core --save
+npm i @ezform/mui --save
 ````
 
-(https://www.npmjs.com/package/@ezform/core)
+(https://www.npmjs.com/package/@ezform/mui)
 
 ## How it works
 
