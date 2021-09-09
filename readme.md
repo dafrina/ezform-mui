@@ -87,6 +87,8 @@ And in order to submit the form simply use the submit function from our ezform o
 <button onClick={ezform.submit}>Submit</button>
 ````
 
+> Important: You can use dots to nest your submitted values, but for simplicity you only get the nested object when the form has been submitted (e.g. the values in the onSubmit config function).
+> Example: `<FieldText id="firstName" name="this.path.is.nested.firstName" ... />` will pass an object to the onSubmit config function with the value of firstName stored in `values["this"]["path"]["is"]["nested"]["firstName"]`. However, when accessing fields or errors from the `FormRefObject` directly, they will only be accessible by calling `ezform.fields["this.path.is.nested.firstName"]`
 
 
 ## Validators
@@ -145,7 +147,14 @@ Checks if a date was entered correctly
 
 Checks if a file was selected on a `FieldFile` component. Please note that this validator only checks if a file is selected, but not if the filetype or size is invalid. You need to implement your own validator to handle these cases.
 
-> Currently, you can only pass one validator function to a `Field` component. If you wish to combine validators, you can simply make a new validator function and call the default validators (or custom ones!) yourself to mix and match.
+### combinedValidator
+
+This function can be used to combine multiple validators. They will be checked in the order from first to last in the array.
+
+Usage:
+````
+<FieldText label="First name" name="firstName" form={ezform} validator={combinedValidator([requiredValidator, urlValidator])} />
+````
 
 ## Components
 
