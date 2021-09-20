@@ -30,7 +30,7 @@ The aim of this project was to make a powerful validation library that not only 
 
 ## Usage
 
-First we need to tell the program that we want to build a form, and what happens when we submit said form. The form will only be submitted if no currently mounted fields fail validation. We can set initial data to prefill our form and we can pass a function as `formatMessage`, which can be used to translate the error message from the validators.
+First we need to tell the program that we want to build a form, and what happens when we submit said form. The form will only be submitted if no currently mounted fields fail validation. We can set initial data to prefill our form and we can pass a function as `formatMessage`, which can be used to translate the error message from the validators. You can also specify that only mounted fields should be submitted. By default, all fields get submitted. If you want to only get the values for form fields that are mounted, you can override it by setting `submitUnmountedFields` to false. This can be useful if you're building a multi-step form or when you want to include form fields in your initialState without having actual inputs for example.
 
 
 ````
@@ -38,6 +38,7 @@ interface FormConfig {
     onSubmit: (values: any) => void;
     initialState?: any;
     formatMessage?: (messageKey: string) => string;
+    submitUnmountedFields?: boolean;
 }
 
 useForm(config: FormConfig);
@@ -52,7 +53,10 @@ const ezform = useForm({
     },
     initialState: {
         firstName: "Johnny",
-        lastName: "Silverhand"
+        lastName: "Silverhand",
+        nested: {
+            objects: "Yes thats possible now!"
+        }
     },
     formatMessage: (messageKey) => translate(messageKey)
 });
@@ -60,21 +64,39 @@ const ezform = useForm({
 
 The `useForm` hook returns a `FormRefObject` which contains the following properties/methods:
 
-- fields: (object containing all form fields with its values)
+- getFields: (object containing all form fields with its values, returns a nested object)
 - setFields: (default setter function for the form fields state)
 - setField: (name: string, value: any, validateImmediately?: boolean (default true))
 - getField: (name: string)
-- errors: (object containing all form fields with its error messages or null)
+- getErrors: (object containing all form fields with its error messages or null, returns a nested object)
 - setErrors: (default setter function for the form errors state)
 - hasError: (fieldName: string) => boolean
-- validators: (object containing all currently registered validators);
+- getValidators: (object containing all currently registered validators, returns a nested object);
 - setValidators: (default setter function for the validators state)
 - submit: () => void (validates all form fields and calls the onSubmit function passed to the useForm hook)
 - reset: () => void (clears all form fields and resets the errors)
 - getHelperText: (fieldName: string) => string
 - formatMessage?: (messageKey: string) => string;
 
-Now lets get to the interesting part! We can now build our form however we like it, without wrapper components or any other setup but the useForm hook.
+You can also define a global configuration for all forms in your application:
+
+````
+import EzformConfig from "@ezform/core";
+
+// set config globally
+EzformConfig({
+	submitUnmountedFields: false
+});
+
+// get global config
+const config = EzformConfig();
+````
+
+> The global settings can be overridden in the config for each individual form.
+
+Now lets get to the interesting part! We can now build our form however we like it, without wrapper components or any other setup but the useForm hook and form components.
+
+> Please note: the examples shown use @ezform/mui form components. [Click here](https://github.com/dafrina/ezform-mui) to use ezform with the Material UI form components.
 
 ````
 <FieldText id="firstName" name="firstName" form={ezform} validator={requiredValidator} label="Please enter your first name" />
@@ -87,9 +109,27 @@ And in order to submit the form simply use the submit function from our ezform o
 <button onClick={ezform.submit}>Submit</button>
 ````
 
-> Important: You can use dots to nest your submitted values, but for simplicity you only get the nested object when the form has been submitted (e.g. the values in the onSubmit config function).
-> Example: `<FieldText id="firstName" name="this.path.is.nested.firstName" ... />` will pass an object to the onSubmit config function with the value of firstName stored in `values["this"]["path"]["is"]["nested"]["firstName"]`. However, when accessing fields or errors from the `FormRefObject` directly, they will only be accessible by calling `ezform.fields["this.path.is.nested.firstName"]`
+You can use dots to nest your submitted values.
 
+For example `<FieldText name="this.path.is.nested.firstName" ... />` will pass an object to the onSubmit config function with the value of firstName stored in `values["this"]["path"]["is"]["nested"]["firstName"]`.
+
+For simplicity, all values get stored in a flat object internally. When calling `ezform.getFields()`, `ezform.getErrors()` or `ezform.getValidators()` however, you will conveniently get a nested object as well. Keep in mind that you still have to pass the field names as a single string with the full path seperated by dots for other getters and setters:
+
+````
+// set one field directly
+ezform.setField("this.path.is.nested.firstName", "John");
+
+// set field with access to the previous state
+ezform.setFields((previousFields) => {
+    return { ...previousFields, "this.path.is.nested.firstName": "John" }
+}
+
+// get a field value
+ezform.getField("this.path.is.nested.firstName");
+
+// check if a the field has an error
+ezform.hasError("this.path.is.nested.firstName");
+````
 
 ## Validators
 
@@ -283,8 +323,8 @@ EZForm uses this technique internally to integrate Material UI's form fields. Th
 Take a look at the `FieldText` source for an easy example:
 
 ````
-const FieldText = (props: FieldTextProps) => {
-	const { id, name, form, validator = () => null, disabled, label, multiline = false } = props;
+export const FieldText = (props: FieldTextProps) => {
+	const { id, name, form, validator = () => null, disabled, label, multiline = false, variant = "standard", color = "primary", placeholder } = props;
 
 	useField(name, validator, form);
 
@@ -294,16 +334,19 @@ const FieldText = (props: FieldTextProps) => {
 
 	return (
 		<TextField
-			variant="outlined"
+			variant={variant}
+			color={color}
 			name={name}
 			id={id}
 			label={label}
 			onChange={handleChange}
-			value={form.fields?.[name] || ''}
+			value={form.fields?.[name] || ""}
 			disabled={disabled}
 			error={form.hasError(name)}
 			helperText={form.getHelperText(name)}
 			multiline={multiline}
+			placeholder={placeholder}
+			fullWidth
 		/>
 	);
 };
