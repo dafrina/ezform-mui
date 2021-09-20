@@ -14,9 +14,9 @@ export const FieldCheckboxGroup = (props: FieldCheckboxGroupProps) => {
 	useField(name, validator, form);
 
 	const handleChange = (option) => () => {
-		const newList = form.fields[name] || [];
+		const newList = form.getField(name) || [];
 
-		const selected = form.fields?.[name]?.find((val) => {
+		const selected = form.getField(name)?.find((val) => {
 			return val === option.value;
 		});
 
@@ -34,7 +34,7 @@ export const FieldCheckboxGroup = (props: FieldCheckboxGroupProps) => {
 			{label && <FormLabel component="legend">{label}</FormLabel>}
 			<FormGroup id={id}>
 				{options.map((option, i) => {
-					const selected = form.fields?.[name]?.find((val) => val === option.value);
+					const selected = form.getField(name)?.find((val) => val === option.value);
 
 					return (
 						<FormControlLabel

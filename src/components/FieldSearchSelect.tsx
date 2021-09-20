@@ -25,11 +25,11 @@ export const FieldSearchSelect = (props: FieldSearchSelectProps) => {
 	};
 
 	useEffect(() => {
-		if (form.fields[name]) {
-			const selected = options.find((o) => o.value === form.fields[name]);
+		if (form.getField(name)) {
+			const selected = options.find((o) => o.value === form.getField(name));
 			setInput(selected?.label || "");
 		}
-	}, [form.fields[name]]);
+	}, [form.getField(name)]);
 
 	const handleInputChange = (e: any, value: any, reason: any) => {
 		if (reason === "clear") {
@@ -49,7 +49,7 @@ export const FieldSearchSelect = (props: FieldSearchSelectProps) => {
 			getOptionLabel={(option) => option?.label || ""}
 			getOptionDisabled={(option) => option?.disabled || false}
 			getOptionSelected={(option, value) => option.value === value}
-			value={form.fields[name]}
+			value={form.getField(name)}
 			inputValue={input}
 			onInputChange={handleInputChange}
 			disableClearable={false}

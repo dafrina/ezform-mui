@@ -61,7 +61,7 @@ export const FieldDate = (props: FieldDateProps) => {
 						name={name}
 						id={id}
 						label={label}
-						value={form.fields?.[name]}
+						value={form.getField(name)}
 						onChange={handleChange}
 						KeyboardButtonProps={{
 							"aria-label": "change date",
@@ -87,7 +87,7 @@ export const FieldDate = (props: FieldDateProps) => {
 						name={name}
 						id={id}
 						label={label}
-						value={form.fields?.[name]}
+						value={form.getField(name)}
 						onChange={handleChange}
 						KeyboardButtonProps={{
 							"aria-label": "change date",
@@ -114,7 +114,7 @@ export const FieldDate = (props: FieldDateProps) => {
 						name={name}
 						id={id}
 						label={label}
-						value={form.fields?.[name]}
+						value={form.getField(name)}
 						onChange={handleChange}
 						KeyboardButtonProps={{
 							"aria-label": "change date",

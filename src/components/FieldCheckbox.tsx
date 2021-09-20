@@ -23,8 +23,8 @@ export const FieldCheckbox = (props: FieldCheckboxProps) => {
 					<Checkbox
 						id={id}
 						disabled={disabled}
-						checked={form.fields?.[name] || false}
-						value={form.fields?.[name] || ""}
+						checked={form.getField(name) || false}
+						value={form.getField(name) || ""}
 						onChange={handleChange}
 						name={name}
 						color={color}

@@ -23,7 +23,7 @@ export const FieldSelect = (props: FieldSelectProps) => {
 			label={label}
 			variant={variant}
 			id={id}
-			value={form.fields?.[name] || ""}
+			value={form.getField(name) || ""}
 			onChange={handleChange}
 			disabled={disabled}
 			error={form.hasError(name)}

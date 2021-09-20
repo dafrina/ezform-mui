@@ -28,7 +28,7 @@ export const FieldMultiSelect = (props: FieldMultiSelectProps) => {
 			label={label}
 			variant={variant}
 			id={id}
-			value={form.fields?.[name] || []}
+			value={form.getField(name) || []}
 			onChange={handleChange}
 			disabled={disabled}
 			error={form.hasError(name)}
@@ -48,7 +48,7 @@ export const FieldMultiSelect = (props: FieldMultiSelectProps) => {
 		>
 			{options.map((option) => (
 				<MenuItem key={option.key} value={option.value} disabled={option?.disabled || false}>
-					<Checkbox checked={form.fields?.[name]?.indexOf(option.value) > -1} color="primary" />
+					<Checkbox checked={form.getField(name)?.indexOf(option.value) > -1} color="primary" />
 					<ListItemText primary={option.label} />
 				</MenuItem>
 			))}

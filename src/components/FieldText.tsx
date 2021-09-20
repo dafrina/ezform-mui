@@ -27,7 +27,7 @@ export const FieldText = (props: FieldTextProps) => {
 			id={id}
 			label={label}
 			onChange={handleChange}
-			value={form.fields?.[name] || ""}
+			value={form.getField(name) || ""}
 			disabled={disabled}
 			error={form.hasError(name)}
 			helperText={form.getHelperText(name)}
