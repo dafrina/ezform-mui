@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import { FormControl, FormControlLabel, FormLabel, FormGroup, Checkbox, FormHelperText } from "@material-ui/core";
 
 export interface FieldCheckboxGroupProps extends FieldBaseProps {
@@ -8,8 +8,8 @@ export interface FieldCheckboxGroupProps extends FieldBaseProps {
 	color?: "default" | "primary" | "secondary";
 }
 
-export const FieldCheckboxGroup = (props: FieldCheckboxGroupProps) => {
-	const { id, name, form, validator = () => null, label, options, color = "secondary" } = props;
+export const FieldCheckboxGroup = memo((props: FieldCheckboxGroupProps) => {
+	const { id, name, form, validator = () => null, label, readonly, options, color = "secondary" } = props;
 
 	useField(name, validator, form);
 
@@ -44,9 +44,10 @@ export const FieldCheckboxGroup = (props: FieldCheckboxGroupProps) => {
 									disabled={option?.disabled || false}
 									checked={!!selected || false}
 									value={option.value}
-									onChange={handleChange(option)}
+									onChange={!readonly ? handleChange(option) : undefined}
 									name={`${name}-key-${i}`}
 									color={color}
+									readOnly={readonly}
 								/>
 							}
 							label={option.label}
@@ -57,4 +58,4 @@ export const FieldCheckboxGroup = (props: FieldCheckboxGroupProps) => {
 			{form.hasError(name) && <FormHelperText error>{form.getHelperText(name)}</FormHelperText>}
 		</FormControl>
 	);
-};
+}, propsEqual);

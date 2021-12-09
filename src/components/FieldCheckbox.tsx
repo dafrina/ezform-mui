@@ -1,14 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import { FormControl, FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 
 export interface FieldCheckboxProps extends FieldBaseProps {
 	color?: "default" | "primary" | "secondary";
 }
 
-export const FieldCheckbox = (props: FieldCheckboxProps) => {
-	const { id, name, form, validator = () => null, disabled, label, color = "secondary" } = props;
+export const FieldCheckbox = memo((props: FieldCheckboxProps) => {
+	const { id, name, form, validator = () => null, disabled, readonly, label, color = "secondary" } = props;
 
 	useField(name, validator, form);
 
@@ -25,9 +25,10 @@ export const FieldCheckbox = (props: FieldCheckboxProps) => {
 						disabled={disabled}
 						checked={form.getField(name) || false}
 						value={form.getField(name) || ""}
-						onChange={handleChange}
+						onChange={!readonly ? handleChange : undefined}
 						name={name}
 						color={color}
+						readOnly={readonly}
 					/>
 				}
 				label={label}
@@ -35,4 +36,4 @@ export const FieldCheckbox = (props: FieldCheckboxProps) => {
 			{form.hasError(name) && <FormHelperText error>{form.getHelperText(name)}</FormHelperText>}
 		</FormControl>
 	);
-};
+}, propsEqual);

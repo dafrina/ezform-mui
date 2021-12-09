@@ -1,15 +1,15 @@
-import React from "react";
+import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
-import {MenuItem, TextField} from "@material-ui/core";
+import { useField, propsEqual } from "@ezform/core";
+import { MenuItem, TextField } from "@material-ui/core";
 
 export interface FieldSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
 	variant?: "filled" | "outlined" | "standard";
 }
 
-export const FieldSelect = (props: FieldSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, label, options, variant = "standard" } = props;
+export const FieldSelect = memo((props: FieldSelectProps) => {
+	const { id, name, form, validator = () => null, disabled, readonly, label, options, variant = "standard" } = props;
 
 	useField(name, validator, form);
 
@@ -29,6 +29,7 @@ export const FieldSelect = (props: FieldSelectProps) => {
 			error={form.hasError(name)}
 			fullWidth
 			helperText={form.getHelperText(name)}
+			InputProps={{readOnly: readonly}}
 		>
 			{options.map((option) => (
 				<MenuItem key={option.key} value={option.value} disabled={option?.disabled || false}>
@@ -37,4 +38,4 @@ export const FieldSelect = (props: FieldSelectProps) => {
 			))}
 		</TextField>
 	);
-};
+}, propsEqual);

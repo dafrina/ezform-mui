@@ -1,7 +1,8 @@
-import React from "react";
-import {FormControl, Grid, Button, FormLabel, FormHelperText, Tooltip} from "@material-ui/core";
-import {FieldBaseProps} from "./FieldBase";
-import {useField} from "@ezform/core";
+import React, { memo, SyntheticEvent } from "react";
+import { FormControl, Grid, Button, FormLabel, FormHelperText, Tooltip } from "@material-ui/core";
+import { FieldBaseProps } from "./FieldBase";
+import { useField, propsEqual } from "@ezform/core";
+import { EzformMuiConfig } from "../config";
 
 export interface FieldFileProps extends FieldBaseProps {
 	buttonLabel?: string;
@@ -13,22 +14,23 @@ export interface FieldFileProps extends FieldBaseProps {
 	multiple?: boolean;
 }
 
-export const FieldFile = (props: FieldFileProps) => {
+export const FieldFile = memo((props: FieldFileProps) => {
 	const {
 		id,
 		name,
 		form,
 		validator = () => null,
 		disabled,
+		readonly,
 		label,
-		buttonLabel = "Select file",
+		buttonLabel,
 		defaultHelperText,
-		noFileSelectedText = "No file selected",
-		fileSelectedText = "$n file(s) selected",
+		noFileSelectedText,
+		fileSelectedText,
 		variant,
 		color,
 		multiple = false
-	} = props;
+	} = {...EzformMuiConfig(), ...props};
 
 	useField(name, validator, form);
 
@@ -97,7 +99,7 @@ export const FieldFile = (props: FieldFileProps) => {
 		<FormControl fullWidth>
 			<FormLabel error={form.hasError(name)}>{label}</FormLabel>
 			<Tooltip title={getTooltipText()}>
-				<Button variant={variant} color={color} disabled={disabled} style={{ marginTop: 5 }}>
+				<Button variant={variant} color={color} disabled={disabled} style={{ marginTop: 5 }} onClick={readonly ? (e: SyntheticEvent) => e.preventDefault() : undefined }>
 					<input multiple={multiple} type="file" id={id} name={name} onChange={handleChange} style={{
 						position: "absolute",
 						left: 0,
@@ -117,4 +119,4 @@ export const FieldFile = (props: FieldFileProps) => {
 			)}
 		</FormControl>
 	);
-};
+}, propsEqual);

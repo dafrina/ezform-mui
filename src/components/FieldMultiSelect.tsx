@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import {
 	MenuItem,
 	ListItemText,
@@ -13,8 +13,8 @@ export interface FieldMultiSelectProps extends FieldBaseProps {
 	variant?: "filled" | "outlined" | "standard";
 }
 
-export const FieldMultiSelect = (props: FieldMultiSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, label, options, variant = "standard" } = props;
+export const FieldMultiSelect = memo((props: FieldMultiSelectProps) => {
+	const { id, name, form, validator = () => null, disabled, readonly, label, options, variant = "standard" } = props;
 
 	useField(name, validator, form);
 
@@ -31,6 +31,7 @@ export const FieldMultiSelect = (props: FieldMultiSelectProps) => {
 			value={form.getField(name) || []}
 			onChange={handleChange}
 			disabled={disabled}
+			InputProps={{readOnly: readonly}}
 			error={form.hasError(name)}
 			SelectProps={{
 				multiple: true,
@@ -54,4 +55,4 @@ export const FieldMultiSelect = (props: FieldMultiSelectProps) => {
 			))}
 		</TextField>
 	);
-};
+}, propsEqual);

@@ -1,10 +1,10 @@
-import React, {ReactNode} from "react";
+import React, { memo, ReactNode } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import { KeyboardDateTimePicker, KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
-import {ParsableDate} from "@material-ui/pickers/constants/prop-types";
-import {FormControl} from "@material-ui/core";
+import { ParsableDate } from "@material-ui/pickers/constants/prop-types";
+import { FormControl } from "@material-ui/core";
 
 export interface FieldDateProps extends FieldBaseProps {
 	format: string;
@@ -21,7 +21,7 @@ export interface FieldDateProps extends FieldBaseProps {
 	type?: "date" | "datetime" | "time";
 }
 
-export const FieldDate = (props: FieldDateProps) => {
+export const FieldDate = memo((props: FieldDateProps) => {
 	const {
 		id,
 		name,
@@ -40,7 +40,8 @@ export const FieldDate = (props: FieldDateProps) => {
 		initialDate,
 		disablePast,
 		disableFuture,
-		type = "date"
+		type = "date",
+		readonly,
 	} = props;
 
 	useField(name, validator, form);
@@ -76,6 +77,7 @@ export const FieldDate = (props: FieldDateProps) => {
 						maxDateMessage={maxDateMessage}
 						disablePast={disablePast}
 						disableFuture={disableFuture}
+						readOnly={readonly}
 					/>
 				)}
 				{type === "datetime" && (
@@ -103,6 +105,7 @@ export const FieldDate = (props: FieldDateProps) => {
 						disablePast={disablePast}
 						disableFuture={disableFuture}
 						ampm={false}
+						readOnly={readonly}
 					/>
 				)}
 				{type === "time" && (
@@ -124,9 +127,10 @@ export const FieldDate = (props: FieldDateProps) => {
 						inputVariant={variant}
 						initialFocusedDate={initialDate}
 						ampm={false}
+						readOnly={readonly}
 					/>
 				)}
 			</MuiPickersUtilsProvider>
 		</FormControl>
 	);
-};
+}, propsEqual);

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo, SyntheticEvent } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, FormHelperText } from "@material-ui/core";
 
 export interface FieldRadioGroupProps extends FieldBaseProps {
@@ -8,8 +8,8 @@ export interface FieldRadioGroupProps extends FieldBaseProps {
 	color?: "default" | "primary" | "secondary";
 }
 
-export const FieldRadioGroup = (props: FieldRadioGroupProps) => {
-	const { id, name, form, validator = () => null, label, options, color = "secondary" } = props;
+export const FieldRadioGroup = memo((props: FieldRadioGroupProps) => {
+	const { id, name, form, validator = () => null, label, readonly, options, color = "secondary" } = props;
 
 	useField(name, validator, form);
 
@@ -20,7 +20,9 @@ export const FieldRadioGroup = (props: FieldRadioGroupProps) => {
 	return (
 		<FormControl error={form.hasError(name)} component="fieldset" fullWidth>
 			{label && <FormLabel component="legend">{label}</FormLabel>}
-			<RadioGroup id={id} value={form.getField(name) || null} onChange={handleChange}>
+			<RadioGroup id={id} value={form.getField(name) || null} onChange={handleChange} onClick={
+				readonly ? (e: SyntheticEvent) => e.preventDefault() : undefined
+			}>
 				{options.map((option) => (
 					<FormControlLabel
 						key={option.key}
@@ -34,4 +36,4 @@ export const FieldRadioGroup = (props: FieldRadioGroupProps) => {
 			{form.hasError(name) && <FormHelperText error>{form.getHelperText(name)}</FormHelperText>}
 		</FormControl>
 	);
-};
+}, propsEqual);

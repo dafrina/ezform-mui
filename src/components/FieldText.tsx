@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
-import { useField } from "@ezform/core";
+import { useField, propsEqual } from "@ezform/core";
 import { TextField } from "@material-ui/core";
 
 export interface FieldTextProps extends FieldBaseProps {
@@ -10,8 +10,8 @@ export interface FieldTextProps extends FieldBaseProps {
 	placeholder?: string;
 }
 
-export const FieldText = (props: FieldTextProps) => {
-	const { id, name, form, validator = () => null, disabled, label, multiline = false, variant = "standard", color = "primary", placeholder } = props;
+export const FieldText = memo((props: FieldTextProps) => {
+	const { id, name, form, validator = () => null, disabled, readonly, label, multiline = false, variant = "standard", color = "primary", placeholder } = props;
 
 	useField(name, validator, form);
 
@@ -34,6 +34,7 @@ export const FieldText = (props: FieldTextProps) => {
 			multiline={multiline}
 			placeholder={placeholder}
 			fullWidth
+			InputProps={{readOnly: readonly}}
 		/>
 	);
-};
+}, propsEqual);
