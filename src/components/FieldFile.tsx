@@ -21,7 +21,7 @@ export const FieldFile = memo((props: FieldFileProps) => {
 		form,
 		validator = () => null,
 		disabled,
-		readonly,
+		readonly = form.isReadonly,
 		label,
 		buttonLabel,
 		defaultHelperText,

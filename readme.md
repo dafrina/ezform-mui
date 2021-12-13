@@ -57,6 +57,22 @@ const ezform = useForm({
 <FieldText id="country" name="address.country" form={ezform} validator={requiredValidator} label="Country" />
 ````
 
+## Global Config
+You can define a global configuration for some props of inputs:
+````
+import { EzformMuiConfig } from "@ezform/mui";
+
+// set config globally
+EzformMuiConfig({
+    buttonLabel: "Select file",
+    noFileSelectedText: "No file selected",
+    fileSelectedText: "$n file(s) selected",
+});
+
+// get global config
+const config = EzformMuiConfig();
+````
+
 ## Components
 
 This library provides a basic set of form fields based on Material UI components. You can also create your own components to use with EZForm. [Click here](https://github.com/dafrina/ezform#creating-your-own-fields) to find out how.

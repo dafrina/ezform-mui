@@ -9,7 +9,7 @@ export interface FieldCheckboxGroupProps extends FieldBaseProps {
 }
 
 export const FieldCheckboxGroup = memo((props: FieldCheckboxGroupProps) => {
-	const { id, name, form, validator = () => null, label, readonly, options, color = "secondary" } = props;
+	const { id, name, form, validator = () => null, label, readonly = form.isReadonly, options, color = "secondary" } = props;
 
 	useField(name, validator, form);
 

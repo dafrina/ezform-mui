@@ -9,7 +9,7 @@ export interface FieldSelectProps extends FieldBaseProps {
 }
 
 export const FieldSelect = memo((props: FieldSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly, label, options, variant = "standard" } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard" } = props;
 
 	useField(name, validator, form);
 

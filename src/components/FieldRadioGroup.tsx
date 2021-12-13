@@ -9,7 +9,7 @@ export interface FieldRadioGroupProps extends FieldBaseProps {
 }
 
 export const FieldRadioGroup = memo((props: FieldRadioGroupProps) => {
-	const { id, name, form, validator = () => null, label, readonly, options, color = "secondary" } = props;
+	const { id, name, form, validator = () => null, label, readonly = form.isReadonly, options, color = "secondary" } = props;
 
 	useField(name, validator, form);
 
