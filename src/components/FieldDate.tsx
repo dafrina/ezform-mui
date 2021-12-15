@@ -53,83 +53,85 @@ export const FieldDate = memo((props: FieldDateProps) => {
 	return (
 		<FormControl fullWidth>
 			<MuiPickersUtilsProvider utils={MomentUtils}>
-				{type === "date" && (
-					<KeyboardDatePicker
-						autoOk={autoOk}
-						disableToolbar={disableToolbar}
-						disabled={disabled}
-						format={format}
-						name={name}
-						id={id}
-						label={label}
-						value={form.getField(name)}
-						onChange={handleChange}
-						KeyboardButtonProps={{
-							"aria-label": "change date",
-						}}
-						error={form.hasError(name)}
-						helperText={form.getHelperText(name)}
-						inputVariant={variant}
-						initialFocusedDate={initialDate}
-						minDate={minDate}
-						minDateMessage={minDateMessage}
-						maxDate={maxDate}
-						maxDateMessage={maxDateMessage}
-						disablePast={disablePast}
-						disableFuture={disableFuture}
-						readOnly={readonly}
-					/>
-				)}
-				{type === "datetime" && (
-					<KeyboardDateTimePicker
-						autoOk={autoOk}
-						disableToolbar={disableToolbar}
-						disabled={disabled}
-						format={format}
-						name={name}
-						id={id}
-						label={label}
-						value={form.getField(name)}
-						onChange={handleChange}
-						KeyboardButtonProps={{
-							"aria-label": "change date",
-						}}
-						error={form.hasError(name)}
-						helperText={form.getHelperText(name)}
-						inputVariant={variant}
-						initialFocusedDate={initialDate}
-						minDate={minDate}
-						minDateMessage={minDateMessage}
-						maxDate={maxDate}
-						maxDateMessage={maxDateMessage}
-						disablePast={disablePast}
-						disableFuture={disableFuture}
-						ampm={false}
-						readOnly={readonly}
-					/>
-				)}
-				{type === "time" && (
-					<KeyboardTimePicker
-						autoOk={autoOk}
-						disableToolbar={disableToolbar}
-						disabled={disabled}
-						format={format}
-						name={name}
-						id={id}
-						label={label}
-						value={form.getField(name)}
-						onChange={handleChange}
-						KeyboardButtonProps={{
-							"aria-label": "change date",
-						}}
-						error={form.hasError(name)}
-						helperText={form.getHelperText(name)}
-						inputVariant={variant}
-						initialFocusedDate={initialDate}
-						ampm={false}
-						readOnly={readonly}
-					/>
-				)}
+				<>
+					{type === "date" && (
+						<KeyboardDatePicker
+							autoOk={autoOk}
+							disableToolbar={disableToolbar}
+							disabled={disabled}
+							format={format}
+							name={name}
+							id={id}
+							label={label}
+							value={form.getField(name)}
+							onChange={handleChange}
+							KeyboardButtonProps={{
+								"aria-label": "change date",
+							}}
+							error={form.hasError(name)}
+							helperText={form.getHelperText(name)}
+							inputVariant={variant}
+							initialFocusedDate={initialDate}
+							minDate={minDate}
+							minDateMessage={minDateMessage}
+							maxDate={maxDate}
+							maxDateMessage={maxDateMessage}
+							disablePast={disablePast}
+							disableFuture={disableFuture}
+							readOnly={readonly}
+						/>
+					)}
+					{type === "datetime" && (
+						<KeyboardDateTimePicker
+							autoOk={autoOk}
+							disableToolbar={disableToolbar}
+							disabled={disabled}
+							format={format}
+							name={name}
+							id={id}
+							label={label}
+							value={form.getField(name)}
+							onChange={handleChange}
+							KeyboardButtonProps={{
+								"aria-label": "change date",
+							}}
+							error={form.hasError(name)}
+							helperText={form.getHelperText(name)}
+							inputVariant={variant}
+							initialFocusedDate={initialDate}
+							minDate={minDate}
+							minDateMessage={minDateMessage}
+							maxDate={maxDate}
+							maxDateMessage={maxDateMessage}
+							disablePast={disablePast}
+							disableFuture={disableFuture}
+							ampm={false}
+							readOnly={readonly}
+						/>
+					)}
+					{type === "time" && (
+						<KeyboardTimePicker
+							autoOk={autoOk}
+							disableToolbar={disableToolbar}
+							disabled={disabled}
+							format={format}
+							name={name}
+							id={id}
+							label={label}
+							value={form.getField(name)}
+							onChange={handleChange}
+							KeyboardButtonProps={{
+								"aria-label": "change date",
+							}}
+							error={form.hasError(name)}
+							helperText={form.getHelperText(name)}
+							inputVariant={variant}
+							initialFocusedDate={initialDate}
+							ampm={false}
+							readOnly={readonly}
+						/>
+					)}
+				</>
 			</MuiPickersUtilsProvider>
 		</FormControl>
 	);

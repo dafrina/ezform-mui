@@ -107,10 +107,20 @@ Select dropdown
 
 ### FieldMultiSelect
 
-Select dropdown
+Simple multiple select dropdown
 
 - options: { key: string; value: string; label: string; disabled?: boolean }[];
 - variant?: "filled" | "outlined" | "standard";
+
+### FieldComboSelect
+
+Multiple select dropdown with chips rendering selected options
+
+- options: { key: string; value: string; label: string; disabled?: boolean }[];
+- variant?: "filled" | "outlined" | "standard";
+- color?: "primary" | "secondary";
+- chipVariant?: "default" | "outlined";
+- chipColor?: "primary" | "secondary";
 
 ### FieldCheckbox
 
