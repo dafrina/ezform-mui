@@ -121,6 +121,7 @@ Multiple select dropdown with chips rendering selected options
 - color?: "primary" | "secondary";
 - chipVariant?: "default" | "outlined";
 - chipColor?: "primary" | "secondary";
+- chipSize?: "medium" | "small";
 
 ### FieldCheckbox
 

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
 import { Autocomplete } from "@material-ui/lab";
-import { useField } from "@ezform/core";
+import { propsEqual, useField } from "@ezform/core";
 import { Chip, TextField } from "@material-ui/core";
 
 export interface FieldComboSelectProps extends FieldBaseProps {
@@ -10,10 +10,11 @@ export interface FieldComboSelectProps extends FieldBaseProps {
 	color?: "primary" | "secondary";
 	chipVariant?: "default" | "outlined";
 	chipColor?: "primary" | "secondary";
+	chipSize?: "medium" | "small";
 }
 
-export const FieldComboSelect = (props: FieldComboSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary", chipVariant = "default", chipColor } = props;
+export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary", chipVariant = "default", chipColor, chipSize } = props;
 
 	useField(name, validator, form);
 
@@ -53,6 +54,7 @@ export const FieldComboSelect = (props: FieldComboSelectProps) => {
 							label={options.find((o) => o.value === v)?.label}
 							variant={chipVariant}
 							color={chipColor}
+							size={chipSize}
 							{...initialProps}
 						/>
 					);
@@ -73,4 +75,4 @@ export const FieldComboSelect = (props: FieldComboSelectProps) => {
 			)}
 		/>
 	);
-};
+}, propsEqual);
