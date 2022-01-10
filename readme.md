@@ -64,7 +64,7 @@ You can create fully dynamic forms. Specify an object path to define fields:
 
 // or map 5 fields iteratively
 { Array(5).fill().map((num, index) => (
-    <FieldText name={"clients[${index}].firstName"} form={ezform} validator={requiredValidator} />
+    <FieldText name={"clients[" + index + "].firstName"} form={ezform} validator={requiredValidator} />
 ))}
 ````
 
@@ -90,7 +90,7 @@ This library provides a basic set of form fields based on Material UI components
 
 ### FieldBase interface
 
-This interface acts as a base for all field properties. All form components described below (except FieldCondition) can take the following properties:
+This interface acts as a base for all field properties. All form components described below (except FieldList and FieldCondition) can take the following properties:
 
 - name: string;
 - form: FormRefObject;
@@ -195,6 +195,43 @@ Simple file upload using native input type="file". This field will be rendered a
 - multiple?: boolean;
 
 The submitted value will be of type [File](https://developer.mozilla.org/en-US/docs/Web/API/File) or [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) in case the ``multiple`` prop is passed.
+
+### FieldList
+
+Component to make dynamic lists containing fields.
+
+Below is an example of a list (array) with objects containing an entry of two fields each (firstName, lastName).
+
+The example validates only the first row of the list, effectively making only the first list entry obligatory.
+````
+<FieldList
+    form={ezform}
+    name="arrayExample"
+    renderRow={({ add, remove, index, total }) => (
+        <React.Fragment key={"list" + index}>
+            <FieldText
+                form={ezform}
+                name={"arrVal[" + index + "].firstName"}
+                label="First name"
+                validator={index < 1 ? requiredValidator : undefined}
+            />
+            <FieldText
+                form={ezform}
+                name={"arrVal[" + index + "].lastName"}
+                validator={index < 1 ? requiredValidator : undefined}
+                label="Last name"
+                variant="outlined"
+            />
+            
+            {index === total ? (
+                <Button onClick={add}>Add</Button>
+            ) : (
+                <Button onClick={remove(index)}>Remove</Button>
+            )}
+        </React.Fragment>
+    )}
+/>
+````
 
 ### FieldCondition
 
