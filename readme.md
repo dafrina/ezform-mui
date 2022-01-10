@@ -50,11 +50,22 @@ const ezform = useForm({
 });
 
 ...
+<FieldText name="firstName" form={ezform} validator={requiredValidator} />
+<FieldText name="lastName" form={ezform} validator={requiredValidator} />
+<FieldText name="address.city" form={ezform} validator={requiredValidator} />
+<FieldText name="address.country" form={ezform} validator={requiredValidator} />
+````
 
-<FieldText id="firstName" name="firstName" form={ezform} validator={requiredValidator} label="Please enter your first name" />
-<FieldText id="lastName" name="lastName" form={ezform} validator={requiredValidator} label="Dont forget your last name" />
-<FieldText id="city" name="address.city" form={ezform} validator={requiredValidator} label="City" />
-<FieldText id="country" name="address.country" form={ezform} validator={requiredValidator} label="Country" />
+You can create fully dynamic forms. Specify an object path to define fields:
+
+````
+// Map this fields value to 'firstName' property of first client
+<FieldText name="clients[0].firstName" form={ezform} validator={requiredValidator} />
+
+// or map 5 fields iteratively
+{ Array(5).fill().map((num, index) => (
+    <FieldText name={"clients[${index}].firstName"} form={ezform} validator={requiredValidator} />
+))}
 ````
 
 ## Global Config
