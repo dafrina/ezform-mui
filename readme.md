@@ -211,13 +211,13 @@ The example validates only the first row of the list, effectively making only th
         <React.Fragment key={"list" + index}>
             <FieldText
                 form={ezform}
-                name={"arrVal[" + index + "].firstName"}
+                name={"arrayExample[" + index + "].firstName"}
                 label="First name"
                 validator={index < 1 ? requiredValidator : undefined}
             />
             <FieldText
                 form={ezform}
-                name={"arrVal[" + index + "].lastName"}
+                name={"arrayExample[" + index + "].lastName"}
                 validator={index < 1 ? requiredValidator : undefined}
                 label="Last name"
                 variant="outlined"
