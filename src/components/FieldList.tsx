@@ -1,46 +1,44 @@
-import React, { useState } from "react";
-import { deepGet, deepSet, flatten, FormRefObject } from "@ezform/core";
+import React from "react";
+import { deepGet, deepSet, FormRefObject } from "@ezform/core";
 
 interface FieldListProps {
 	form: FormRefObject;
 	name: string;
 	renderRow: (props: {
-		add: () => void;
+		add: () => () => void;
 		remove: (index: number) => () => void;
 		index: number;
 		total: number;
 	}) => any;
+	validateOnChange?: boolean;
 }
 
 export const FieldList = (props: FieldListProps) => {
-	const { form, name, renderRow } = props;
-	const [list, setList] = useState(
-		(deepGet(form.getFields(), name) || []).length || 0
-	);
+	const { form, name, renderRow, validateOnChange = false } = props;
 
-	const add = () => setList((p: number) => p + 1);
+	const add = () => () => {
+		form.setFields((fields) => {
+			const arr = deepGet(fields, name) || [];
+			arr.push({});
+			const newObj = { ...fields };
+			deepSet(newObj, name, arr);
+			return newObj;
+		}, validateOnChange);
+	};
 
 	const remove = (i: number) => () => {
 		form.setFields((fields) => {
-			const values = {};
-
-			Object.keys(fields).forEach((k) => {
-				if (fields[k]) {
-					deepSet(values, k, fields[k] || null);
-				}
-			});
-
-			const arr = deepGet(values, name);
+			const arr = deepGet(fields, name);
 			arr?.splice(i, 1);
-			return flatten(values);
-		});
-		setList((p: number) => p - 1);
+			return fields;
+		}, validateOnChange);
 	};
 
 	const render = () => {
+		const arr = form.getFields()[name] || [];
 		const rows = [];
-		for (let i = 0; i < list + 1; i++) {
-			rows.push(renderRow({ add, remove, index: i, total: list + 0 }));
+		for (let index = 0; index < arr.length; index++) {
+			rows.push(renderRow({ add, remove, index, total: arr.length }));
 		}
 		return rows;
 	};
