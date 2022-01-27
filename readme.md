@@ -224,7 +224,7 @@ The example validates only the first row of the list, effectively making only th
             />
             
             {index === total ? (
-                <Button onClick={add}>Add</Button>
+                <Button onClick={add()}>Add</Button>
             ) : (
                 <Button onClick={remove(index)}>Remove</Button>
             )}

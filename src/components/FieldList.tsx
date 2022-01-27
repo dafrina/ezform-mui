@@ -37,7 +37,7 @@ export const FieldList = (props: FieldListProps) => {
 	const render = () => {
 		const arr = form.getFields()[name] || [];
 		const rows = [];
-		for (let index = 0; index < arr.length; index++) {
+		for (let index = 0; index <= arr.length; index++) {
 			rows.push(renderRow({ add, remove, index, total: arr.length }));
 		}
 		return rows;
