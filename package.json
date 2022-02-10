@@ -36,7 +36,7 @@
     "moment": "^2.29.1"
   },
   "dependencies": {
-    "@ezform/core": "^2.0.10"
+    "@ezform/core": "^2.0.11"
   },
   "peerDependencies": {
     "react": "^17.x",
