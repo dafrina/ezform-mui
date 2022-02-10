@@ -25,7 +25,7 @@ export const FieldCheckbox = memo((props: FieldCheckboxProps) => {
 						disabled={disabled}
 						checked={form.getField(name) || false}
 						value={form.getField(name) || ""}
-						onChange={!readonly ? handleChange : undefined}
+						onChange={!readonly && handleChange}
 						name={name}
 						color={color}
 						readOnly={readonly}

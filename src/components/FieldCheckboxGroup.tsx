@@ -44,7 +44,7 @@ export const FieldCheckboxGroup = memo((props: FieldCheckboxGroupProps) => {
 									disabled={option?.disabled || false}
 									checked={!!selected || false}
 									value={option.value}
-									onChange={!readonly ? handleChange(option) : undefined}
+									onChange={!readonly && handleChange(option)}
 									name={`${name}-key-${i}`}
 									color={color}
 									readOnly={readonly}

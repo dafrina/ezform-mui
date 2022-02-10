@@ -1,4 +1,5 @@
 export * from "./FieldBase";
+export * from "./FieldSwitch";
 export * from "./FieldCheckbox";
 export * from "./FieldCheckboxGroup";
 export * from "./FieldRadioGroup";
@@ -8,6 +9,6 @@ export * from "./FieldMultiSelect";
 export * from "./FieldDate";
 export * from "./FieldSearchSelect";
 export * from "./FieldComboSelect";
-export * from "./FieldCondition";
 export * from "./FieldFile";
+export * from "./FieldCondition";
 export * from "./FieldList";
