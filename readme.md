@@ -140,6 +140,14 @@ Single checkbox
 
 - color?: "default" | "primary" | "secondary";
 
+### FieldSwitch
+
+Switch input
+
+- color?: "default" | "primary" | "secondary";
+- labelBefore?: string;
+- size?: "medium" | "small";
+
 ### FieldCheckboxGroup
 
 Multiple checkboxes under the same field name
