@@ -36,8 +36,13 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 			options={options}
 			filterSelectedOptions
 			value={form.getField(name) || []}
-			onChange={(event: any, newValue: any[] | null) => {
-				form.setField(name, newValue?.map((v: any) => (typeof v === "object" ? v.value : v) || null));
+			onChange={(event: any, newValue: any[] | null, reason: any) => {
+				if (reason === "clear") {
+					form.setField(name, []);
+				} else {
+					const newFields = newValue?.map((v: any) => v?.value || v);
+					form.setField(name, newFields);
+				}
 			}}
 			getOptionLabel={(option) => option.label}
 			getOptionDisabled={(option) => option?.disabled}
