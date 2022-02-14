@@ -31,7 +31,6 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 			onClose={!readonly ? () => setOpen(false) : undefined}
 			multiple
 			id={id}
-			disablePortal
 			disabled={disabled}
 			options={options}
 			filterSelectedOptions
