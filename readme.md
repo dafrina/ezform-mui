@@ -109,6 +109,14 @@ Basic text input
 - color?: "primary" | "secondary";
 - placeholder?: string;
 
+### FieldPassword
+
+Same as text field, but for passwords
+
+- variant?: "filled" | "outlined" | "standard";
+- color?: "primary" | "secondary";
+- placeholder?: string;
+
 ### FieldSelect
 
 Select dropdown

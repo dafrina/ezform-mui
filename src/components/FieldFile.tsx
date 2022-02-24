@@ -82,7 +82,7 @@ export const FieldFile = memo((props: FieldFileProps) => {
 		if (formVal.length && formVal.length > 0) {
 			console.log(formVal);
 			return (
-				<Grid container justifyContent="space-between">
+				<Grid container justify="space-between">
 					{Array.from(formVal).map((f: any, i: number) => (
 						<React.Fragment key={f.name + "_" + i}>
 							<Grid item xs={8}>{f.name}</Grid>

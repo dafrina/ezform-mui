@@ -63,7 +63,6 @@ export const FieldSearchSelect = memo((props: FieldSearchSelectProps) => {
 			id={id}
 			onChange={handleChange}
 			disabled={disabled}
-			fullWidth
 			options={options}
 			getOptionLabel={(option) => option?.label || ""}
 			getOptionDisabled={(option) => option?.disabled || false}
@@ -72,7 +71,6 @@ export const FieldSearchSelect = memo((props: FieldSearchSelectProps) => {
 			inputValue={input}
 			onInputChange={handleInputChange}
 			disableClearable={false}
-			clearOnBlur={false}
 			renderInput={(params) => (
 				<TextField
 					{...params}
