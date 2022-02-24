@@ -12,3 +12,4 @@ export * from "./FieldComboSelect";
 export * from "./FieldFile";
 export * from "./FieldCondition";
 export * from "./FieldList";
+export * from "./FieldPassword";
