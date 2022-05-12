@@ -7,6 +7,7 @@ import {
 	Checkbox,
 	TextField
 } from "@material-ui/core";
+import {FieldReadonly} from "./FieldReadonly";
 
 export interface FieldMultiSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
@@ -22,6 +23,26 @@ export const FieldMultiSelect = memo((props: FieldMultiSelectProps) => {
 		form.setField(name, e.target.value);
 	};
 
+	if (readonly) {
+		const value = [];
+
+		(form.getField(name) || []).forEach((val) => {
+			const label = options.find((f) => f.value === val)?.label;
+			value.push(label);
+		});
+
+		return (
+			<FieldReadonly
+				variant={variant}
+				name={name}
+				id={id}
+				label={label}
+				value={value.join(", ")}
+				fullWidth
+			/>
+		);
+	}
+
 	return (
 		<TextField
 			select
@@ -31,7 +52,6 @@ export const FieldMultiSelect = memo((props: FieldMultiSelectProps) => {
 			value={form.getField(name) || []}
 			onChange={handleChange}
 			disabled={disabled}
-			InputProps={{readOnly: readonly}}
 			error={form.hasError(name)}
 			SelectProps={{
 				multiple: true,
@@ -40,7 +60,7 @@ export const FieldMultiSelect = memo((props: FieldMultiSelectProps) => {
 					selected.map((s: string) => {
 						const option = options.find((o) => o?.value === s);
 						if (option) render.push(option?.label);
-					})
+					});
 					return render.join(", ");
 				}
 			}}

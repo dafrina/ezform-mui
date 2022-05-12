@@ -3,6 +3,7 @@ import { FieldBaseProps } from "./FieldBase";
 import { useField, propsEqual } from "@ezform/core";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import {FieldReadonly} from "./FieldReadonly";
 
 export interface FieldSearchSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
@@ -42,18 +43,14 @@ export const FieldSearchSelect = memo((props: FieldSearchSelectProps) => {
 
 	if (readonly) {
 		return (
-			<TextField
+			<FieldReadonly
 				variant={variant}
 				color={color}
 				name={name}
 				id={id}
 				label={label}
 				value={options.find((f) => f.value === form.getField(name))?.label || ""}
-				disabled={disabled}
-				error={form.hasError(name)}
-				helperText={form.getHelperText(name)}
 				fullWidth
-				InputProps={{readOnly: readonly}}
 			/>
 		);
 	}

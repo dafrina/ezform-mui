@@ -3,6 +3,7 @@ import { FieldBaseProps } from "./FieldBase";
 import { Autocomplete } from "@material-ui/lab";
 import { propsEqual, useField } from "@ezform/core";
 import { Chip, TextField } from "@material-ui/core";
+import {FieldReadonly} from "./FieldReadonly";
 
 export interface FieldComboSelectProps extends FieldBaseProps {
 	options: { key: string; value: string; label: string; disabled?: boolean }[];
@@ -24,11 +25,32 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 
 	const [open, setOpen] = useState(false);
 
+	if (readonly) {
+		const value = [];
+
+		(form.getField(name) || []).forEach((val) => {
+			const label = options.find((f) => f.value === val)?.label;
+			value.push(label);
+		});
+
+		return (
+			<FieldReadonly
+				variant={variant}
+				color={color}
+				name={name}
+				id={id}
+				label={label}
+				value={value.join(", ")}
+				fullWidth
+			/>
+		);
+	}
+
 	return (
 		<Autocomplete
-			open={!readonly ? open : false}
-			onOpen={!readonly ? () => setOpen(true) : undefined}
-			onClose={!readonly ? () => setOpen(false) : undefined}
+			open={open}
+			onOpen={() => setOpen(true)}
+			onClose={() => setOpen(false)}
 			multiple
 			id={id}
 			disabled={disabled}
@@ -49,9 +71,6 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 			renderTags={(value: any[], getTagProps: any) => {
 				return value.map((v, index) => {
 					const initialProps = getTagProps({ index });
-					if (readonly) {
-						initialProps["onDelete"] = null;
-					}
 					return (
 						<Chip
 							key={v}
@@ -64,7 +83,6 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 					);
 				});
 			}}
-			disableClearable={readonly}
 			renderInput={(params) => (
 				<TextField
 					{...params}
@@ -74,7 +92,6 @@ export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
 					error={form.hasError(name)}
 					helperText={form.getHelperText(name)}
 					fullWidth
-					InputProps={{ ...params["InputProps"], readOnly: readonly }}
 				/>
 			)}
 		/>

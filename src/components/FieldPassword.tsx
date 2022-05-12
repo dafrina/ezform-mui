@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
 import { propsEqual, useField } from "@ezform/core";
 import { TextField } from "@material-ui/core";
+import {FieldReadonly} from "./FieldReadonly";
 
 export interface FieldPasswordProps extends FieldBaseProps {
 	variant?: "filled" | "outlined" | "standard";
@@ -10,7 +11,7 @@ export interface FieldPasswordProps extends FieldBaseProps {
 }
 
 export const FieldPassword = memo((props: FieldPasswordProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, variant = "standard", color = "primary", placeholder } = props;
+	const { id, name, form, validator = () => null, disabled, label, variant = "standard", color = "primary", placeholder } = props;
 
 	useField(name, validator, form);
 
@@ -34,7 +35,6 @@ export const FieldPassword = memo((props: FieldPasswordProps) => {
 			multiline={false}
 			placeholder={placeholder}
 			fullWidth
-			InputProps={{ readOnly: readonly }}
 		/>
 	);
 }, propsEqual);

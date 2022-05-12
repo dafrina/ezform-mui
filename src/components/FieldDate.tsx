@@ -5,6 +5,8 @@ import { KeyboardDateTimePicker, KeyboardDatePicker, KeyboardTimePicker, MuiPick
 import MomentUtils from "@date-io/moment";
 import { ParsableDate } from "@material-ui/pickers/constants/prop-types";
 import { FormControl } from "@material-ui/core";
+import {FieldReadonly} from "./FieldReadonly";
+import moment from "moment";
 
 export interface FieldDateProps extends FieldBaseProps {
 	format: string;
@@ -50,6 +52,19 @@ export const FieldDate = memo((props: FieldDateProps) => {
 		form.setField(name, date?.unix() * 1000);
 	};
 
+	if (readonly) {
+		return (
+			<FieldReadonly
+				variant={variant}
+				name={name}
+				id={id}
+				label={label}
+				value={moment(form.getField(name)).format(format)}
+				fullWidth
+			/>
+		);
+	}
+
 	return (
 		<FormControl fullWidth>
 			<MuiPickersUtilsProvider utils={MomentUtils}>
@@ -78,7 +93,6 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							maxDateMessage={maxDateMessage}
 							disablePast={disablePast}
 							disableFuture={disableFuture}
-							readOnly={readonly}
 						/>
 					)}
 					{type === "datetime" && (
@@ -106,7 +120,6 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							disablePast={disablePast}
 							disableFuture={disableFuture}
 							ampm={false}
-							readOnly={readonly}
 						/>
 					)}
 					{type === "time" && (
@@ -128,7 +141,6 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							inputVariant={variant}
 							initialFocusedDate={initialDate}
 							ampm={false}
-							readOnly={readonly}
 						/>
 					)}
 				</>

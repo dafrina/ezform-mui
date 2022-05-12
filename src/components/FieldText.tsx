@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { FieldBaseProps } from "./FieldBase";
 import { useField, propsEqual } from "@ezform/core";
 import { TextField } from "@material-ui/core";
+import {FieldReadonly} from "./FieldReadonly";
 
 export interface FieldTextProps extends FieldBaseProps {
 	multiline?: boolean;
@@ -19,6 +20,22 @@ export const FieldText = memo((props: FieldTextProps) => {
 		form.setField(name, e.target.value);
 	};
 
+	if (readonly) {
+		return (
+			<FieldReadonly
+				variant={variant}
+				color={color}
+				name={name}
+				id={id}
+				label={label}
+				value={form.getField(name) || ""}
+				multiline={multiline}
+				placeholder={placeholder}
+				fullWidth
+			/>
+		)
+	}
+
 	return (
 		<TextField
 			variant={variant}
@@ -34,7 +51,6 @@ export const FieldText = memo((props: FieldTextProps) => {
 			multiline={multiline}
 			placeholder={placeholder}
 			fullWidth
-			InputProps={{readOnly: readonly}}
 		/>
 	);
 }, propsEqual);
