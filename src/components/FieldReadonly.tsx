@@ -21,4 +21,4 @@ const StyledTextField = withStyles({
 	},
 })(TextField);
 
-export const FieldReadonly = (props) => <StyledTextField {...props} inputProps={{readOnly: true}} InputLabelProps={{ shrink: true }} />;
+export const FieldReadonly = (props) => <StyledTextField {...props} variant="standard" inputProps={{readOnly: true}} InputLabelProps={{ shrink: true }} />;
