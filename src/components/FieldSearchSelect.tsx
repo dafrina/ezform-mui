@@ -64,7 +64,7 @@ export const FieldSearchSelect = memo((props: FieldSearchSelectProps) => {
 			getOptionLabel={(option) => option?.label || ""}
 			getOptionDisabled={(option) => option?.disabled || false}
 			getOptionSelected={(option, value) => option.value === value}
-			value={form.getField(name) || ""}
+			value={form.getField(name)}
 			inputValue={input}
 			onInputChange={handleInputChange}
 			disableClearable={false}
