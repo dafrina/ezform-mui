@@ -1,6 +1,6 @@
 {
   "name": "@ezform/mui",
-  "version": "2.0.21",
+  "version": "2.0.22",
   "description": "Material UI form components for use with EZForm React validation and form library",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,7 +36,7 @@
     "moment": "^2.29.1"
   },
   "dependencies": {
-    "@ezform/core": "^2.0.18"
+    "@ezform/core": "^2.0.22"
   },
   "peerDependencies": {
     "react": "^16.9.0",
