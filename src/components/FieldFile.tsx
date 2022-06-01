@@ -12,6 +12,7 @@ export interface FieldFileProps extends FieldBaseProps {
 	variant?: "contained" | "outlined" | "text";
 	color?: "default" | "inherit" | "primary" | "secondary";
 	multiple?: boolean;
+	accept?: string;
 }
 
 export const FieldFile = memo((props: FieldFileProps) => {
@@ -29,7 +30,8 @@ export const FieldFile = memo((props: FieldFileProps) => {
 		fileSelectedText,
 		variant,
 		color,
-		multiple = false
+		multiple = false,
+		accept,
 	} = {...EzformMuiConfig(), ...props};
 
 	useField(name, validator, form);
@@ -108,7 +110,7 @@ export const FieldFile = memo((props: FieldFileProps) => {
 						height: "100%",
 						opacity: 0,
 						cursor: "pointer",
-					}} title=" " />
+					}} title=" " accept={accept} />
 					{buttonLabel} {getFileText()}
 				</Button>
 			</Tooltip>

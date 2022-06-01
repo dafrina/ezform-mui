@@ -209,6 +209,7 @@ Simple file upload using native input type="file". This field will be rendered a
 - variant?: "contained" | "outlined" | "text";
 - color?: "default" | "inherit" | "primary" | "secondary";
 - multiple?: boolean;
+- accept?: string;
 
 The submitted value will be of type [File](https://developer.mozilla.org/en-US/docs/Web/API/File) or [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) in case the ``multiple`` prop is passed.
 
