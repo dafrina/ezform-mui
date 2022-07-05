@@ -12,9 +12,9 @@ export interface FieldSearchSelectProps extends FieldBaseProps {
 }
 
 export const FieldSearchSelect = memo((props: FieldSearchSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary" } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary", defaultValue } = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const [input, setInput] = useState("");
 

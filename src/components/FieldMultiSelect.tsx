@@ -15,9 +15,9 @@ export interface FieldMultiSelectProps extends FieldBaseProps {
 }
 
 export const FieldMultiSelect = memo((props: FieldMultiSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard" } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", defaultValue } = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const handleChange = (e) => {
 		form.setField(name, e.target.value);

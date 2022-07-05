@@ -15,9 +15,9 @@ export interface FieldComboSelectProps extends FieldBaseProps {
 }
 
 export const FieldComboSelect = memo((props: FieldComboSelectProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary", chipVariant = "default", chipColor, chipSize } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, options, variant = "standard", color = "primary", chipVariant = "default", chipColor, chipSize, defaultValue } = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const getOptionSelected = (option, value) => {
 		return option.value === value;

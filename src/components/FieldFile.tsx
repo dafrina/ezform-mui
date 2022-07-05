@@ -32,9 +32,10 @@ export const FieldFile = memo((props: FieldFileProps) => {
 		color,
 		multiple = false,
 		accept,
+		defaultValue,
 	} = {...EzformMuiConfig(), ...props};
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const handleChange = (e: any) => {
 		const {files} = e.target;

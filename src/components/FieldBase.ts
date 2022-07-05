@@ -8,4 +8,5 @@ export interface FieldBaseProps {
 	disabled?: boolean;
 	readonly?: boolean;
 	label?: string;
+	defaultValue?: any;
 }

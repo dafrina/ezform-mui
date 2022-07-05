@@ -44,9 +44,10 @@ export const FieldDate = memo((props: FieldDateProps) => {
 		disableFuture,
 		type = "date",
 		readonly = form.isReadonly,
+		defaultValue
 	} = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const handleChange = (date: any) => {
 		form.setField(name, date?.unix() * 1000);

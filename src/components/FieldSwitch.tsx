@@ -10,9 +10,9 @@ export interface FieldSwitchProps extends FieldBaseProps {
 }
 
 export const FieldSwitch = (props: FieldSwitchProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, labelBefore, color = "secondary", size } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, labelBefore, color = "secondary", size, defaultValue } = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const handleChange = (e) => {
 		form.setField(name, e.target.checked);

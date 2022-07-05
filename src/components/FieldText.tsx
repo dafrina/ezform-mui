@@ -12,9 +12,9 @@ export interface FieldTextProps extends FieldBaseProps {
 }
 
 export const FieldText = memo((props: FieldTextProps) => {
-	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, multiline = false, variant = "standard", color = "primary", placeholder } = props;
+	const { id, name, form, validator = () => null, disabled, readonly = form.isReadonly, label, multiline = false, variant = "standard", color = "primary", placeholder, defaultValue } = props;
 
-	useField(name, validator, form);
+	useField(name, validator, form, defaultValue);
 
 	const handleChange = (e) => {
 		form.setField(name, e.target.value);

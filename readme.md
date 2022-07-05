@@ -99,6 +99,7 @@ This interface acts as a base for all field properties. All form components desc
 - disabled?: boolean;
 - readonly?: boolean;
 - label?: string;
+- defaultValue?: any;
 
 ### FieldText
 
