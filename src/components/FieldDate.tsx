@@ -10,6 +10,7 @@ import moment from "moment";
 
 export interface FieldDateProps extends FieldBaseProps {
 	format: string;
+	placeholder?: string;
 	autoOk?: boolean;
 	disableToolbar?: boolean;
 	variant?: "filled" | "outlined" | "standard";
@@ -44,7 +45,8 @@ export const FieldDate = memo((props: FieldDateProps) => {
 		disableFuture,
 		type = "date",
 		readonly = form.isReadonly,
-		defaultValue
+		defaultValue,
+		placeholder,
 	} = props;
 
 	useField(name, validator, form, defaultValue);
@@ -79,7 +81,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							name={name}
 							id={id}
 							label={label}
-							value={form.getField(name)}
+							value={form.getField(name) || null}
 							onChange={handleChange}
 							KeyboardButtonProps={{
 								"aria-label": "change date",
@@ -94,6 +96,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							maxDateMessage={maxDateMessage}
 							disablePast={disablePast}
 							disableFuture={disableFuture}
+							InputProps={{placeholder}}
 						/>
 					)}
 					{type === "datetime" && (
@@ -105,7 +108,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							name={name}
 							id={id}
 							label={label}
-							value={form.getField(name)}
+							value={form.getField(name) || null}
 							onChange={handleChange}
 							KeyboardButtonProps={{
 								"aria-label": "change date",
@@ -121,6 +124,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							disablePast={disablePast}
 							disableFuture={disableFuture}
 							ampm={false}
+							InputProps={{placeholder}}
 						/>
 					)}
 					{type === "time" && (
@@ -132,7 +136,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							name={name}
 							id={id}
 							label={label}
-							value={form.getField(name)}
+							value={form.getField(name) || null}
 							onChange={handleChange}
 							KeyboardButtonProps={{
 								"aria-label": "change date",
@@ -142,6 +146,7 @@ export const FieldDate = memo((props: FieldDateProps) => {
 							inputVariant={variant}
 							initialFocusedDate={initialDate}
 							ampm={false}
+							InputProps={{placeholder}}
 						/>
 					)}
 				</>
