@@ -17,12 +17,13 @@ export const FieldList = (props: FieldListProps) => {
 	const { form, name, renderRow, validateOnChange = false } = props;
 	const [length, setLength] = useState<number>(null);
 
+	const arr = deepGet(form.getFields(), name);
+
 	useEffect(() => {
-		if (!length) {
-			let arr = deepGet(form.getFields(), name) || [];
+		if (arr && length !== arr.length) {
 			setLength(arr?.length);
 		}
-	}, [form.getFields()]);
+	}, [JSON.stringify(arr)]);
 
 	const add = () => () => {
 		form.setFields((fields) => {
@@ -44,13 +45,5 @@ export const FieldList = (props: FieldListProps) => {
 		}, validateOnChange);
 	};
 
-	const render = () => {
-		const rows = [];
-		for (let index = 0; index <= (length || 0); index++) {
-			rows.push(renderRow({ add, remove, index, total: length }));
-		}
-		return rows;
-	};
-
-	return render() as any;
+	return Array(length).fill(0).map((nil, index) => renderRow({ add, remove, index, total: length })) as any;
 };
