@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, {memo, useEffect, useState} from "react";
 import { FieldBaseProps } from "./FieldBase";
 import { useField, propsEqual } from "@ezform/core";
 import { FormControl, FormControlLabel, FormLabel, FormGroup, Checkbox, FormHelperText } from "@material-ui/core";
@@ -13,20 +13,23 @@ export const FieldCheckboxGroup = memo((props: FieldCheckboxGroupProps) => {
 
 	useField(name, validator, form, defaultValue);
 
+	const [selectedOptions, setSelectedOptions] = useState([]);
+
+	useEffect(() => {
+		form.setField(name, selectedOptions);
+	}, [selectedOptions]);
+
 	const handleChange = (option) => () => {
-		const newList = form.getField(name) || [];
-
-		const selected = form.getField(name)?.find((val) => {
-			return val === option.value;
+		setSelectedOptions((p) => {
+			const arr = [...p];
+			const index = arr.indexOf(option.value);
+			if (index >= 0) {
+				arr.splice(index, 1);
+				return arr;
+			}
+			arr.push(option.value);
+			return arr;
 		});
-
-		if (newList.length <= 0 || !selected) {
-			newList.push(option.value);
-		} else {
-			newList.splice(newList.indexOf(option.value), 1);
-		}
-
-		form.setField(name, newList);
 	};
 
 	return (
