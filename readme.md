@@ -95,7 +95,7 @@ This interface acts as a base for all field properties. All form components desc
 - name: string;
 - form: FormRefObject;
 - id?: string;
-- validator?: (value: any) => string | null;
+- validator?: ValidatorType;
 - disabled?: boolean;
 - readonly?: boolean;
 - label?: string;

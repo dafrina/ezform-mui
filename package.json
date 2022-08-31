@@ -1,6 +1,6 @@
 {
   "name": "@ezform/mui",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Material UI form components for use with EZForm React validation and form library",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -1,10 +1,10 @@
-import { FormRefObject } from "@ezform/core";
+import {FormRefObject, FieldType, ValidatorType} from "@ezform/core";
 
 export interface FieldBaseProps {
 	name: string;
 	form: FormRefObject;
 	id?: string;
-	validator?: (value: any, formatMessage?: (messageKey: string) => string) => string | null;
+	validator?: ValidatorType;
 	disabled?: boolean;
 	readonly?: boolean;
 	label?: string;
