@@ -10,12 +10,11 @@ interface FieldListProps {
 		index: number;
 		total: number;
 	}) => any;
-	validateOnChange?: boolean;
 	extraRows?: number;
 }
 
 export const FieldList = (props: FieldListProps) => {
-	const { form, name, renderRow, validateOnChange = false, extraRows = 0 } = props;
+	const { form, name, renderRow, extraRows = 0 } = props;
 	const [length, setLength] = useState<number>(null);
 
 	const arr = deepGet(form.getFields(), name);
@@ -34,7 +33,7 @@ export const FieldList = (props: FieldListProps) => {
 			deepSet(newObj, name, arr);
 			setLength((p) => p+1);
 			return newObj;
-		}, validateOnChange);
+		});
 	};
 
 	const remove = (i: number) => () => {
@@ -43,7 +42,7 @@ export const FieldList = (props: FieldListProps) => {
 			arr.splice(i, 1);
 			setLength((p) => p-1);
 			return fields;
-		}, validateOnChange);
+		});
 	};
 
 	return Array(length + extraRows).fill(0).map((nil, index) => renderRow({ add, remove, index, total: length })) as any;
