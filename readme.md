@@ -225,6 +225,7 @@ The example validates only the first row of the list, effectively making only th
 <FieldList
     form={ezform}
     name="arrayExample"
+    extraRows={1}
     renderRow={({ add, remove, index, total }) => (
         <React.Fragment key={"list" + index}>
             <FieldText
@@ -241,10 +242,10 @@ The example validates only the first row of the list, effectively making only th
                 variant="outlined"
             />
             
-            {index === total ? (
-                <Button onClick={add()}>Add</Button>
-            ) : (
+            {index < total ? (
                 <Button onClick={remove(index)}>Remove</Button>
+            ) : (
+                <Button onClick={add()}>Add</Button>
             )}
         </React.Fragment>
     )}
